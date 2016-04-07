@@ -6,15 +6,17 @@ import time,string,math
 
 def printsnmpwalk():
 
-	str_ifindex = "snmpwalk -v 2c  -c snmpsoho2000 192.168.48.10 IF-MIB::ifDescr|grep -w Port-channel1 | cut -d '=' -f 1 | cut -d '.' -f 2"
+	str_ifindex = ("snmpwalk -v 2c  -c snmpsoho2000 192.168.48.10 IF-MIB::ifDescr"
+		"|grep -w GigabitEthernet0/1 | cut -d '=' -f 1 | cut -d '.' -f 2")
 	#str_ifHCOutOctets = "snmpget -v 2c  -c snmpsoho2000 192.168.48.10 IF-MIB::ifHCOutOctets." + ifindex + " | cut -d ':' -f 4 | tr -d '[:blank:]'"
-	ifindex = 0
 	
 	p=subprocess.Popen(str_ifindex, shell=True, stdout=subprocess.PIPE) 
 	p.wait()
 	print("return code:%s"%p.returncode)
 	ifindex = int(p.stdout.read().strip())
-	str_ifHCOutOctets = "snmpget -v 2c  -c snmpsoho2000 192.168.48.10 IF-MIB::ifHCOutOctets." + str(ifindex) + " | cut -d ':' -f 4 | tr -d '[:blank:]'"
+	str_ifHCOutOctets = ("snmpget -v 2c  -c snmpsoho2000 192.168.48.10 IF-MIB::ifHCOutOctets." 
+		+ str(ifindex) + 
+		" | cut -d ':' -f 4 | tr -d '[:blank:]'")
 
 	print("ifindex:%s" %ifindex)
 	starttime = datetime.datetime.now()
