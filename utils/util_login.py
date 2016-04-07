@@ -8,7 +8,7 @@ HOST = "192.168.48.10"
 
 tn = telnetlib.Telnet(HOST)
 #tn.read_until(b"Password:")
-tn.write(b"uxin@yxp@888\n")
+tn.write(b"@888\n")
 tn.write(b"sh ip int b\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 tn.write(b"\n")
 tn.write(b"exit\n")
